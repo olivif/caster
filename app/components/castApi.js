@@ -56,18 +56,49 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
         }
     };
 
-    this.launchApp = function () {
-        console.log("Launching app");
-        chrome.cast.requestSession(onSuccess, onError);
+    this.loadMedia = function (mediaUrl) {
+
+        launchApp(loadMediaObject);
+        
+        function loadMediaObject() {
+            // Prepare mediaInfo object
+            var mediaInfo = new chrome.cast.media.MediaInfo(mediaUrl);
+            mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+            mediaInfo.metadata.metadataType = chrome.cast.media.MetadataType.GENERIC;
+            mediaInfo.contentType = 'video/mp4';
+            mediaInfo.metadata.title = "Placeholder title";
+            mediaInfo.metadata.images = [];
+
+            // Load 
+            var request = new chrome.cast.media.LoadRequest(mediaInfo);
+            request.autoplay = true;
+            request.currentTime = 0;
+
+            session.loadMedia(request, onSuccess, onError);
+        }
 
         function onSuccess(e) {
-            console.log("Received sesssion with id " + e.sessionId);
-            session = e;
+            console.log("Media request succeeded");
         }
-        
+
         function onError(e) {
-            console.log("No session");
-        } 
+            console.log("Media request failed");
+        }
+
+        function launchApp(onAppLaunched) {
+            console.log("Launching app");
+            chrome.cast.requestSession(onSuccess, onError);
+
+            function onSuccess(e) {
+                console.log("Received sesssion with id " + e.sessionId);
+                session = e;
+                onAppLaunched();
+            }
+
+            function onError(e) {
+                console.log("No session");
+            }
+        }
     };
 
 }]);

@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', 'castApi', function($scope, castApi) {
+app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi) {
 
     $scope.alerts = {};
 
@@ -13,9 +13,14 @@ app.controller('HomeController', ['$scope', 'castApi', function($scope, castApi)
     }
 
     function cast() {
-        castApi.launchApp();
+
+        if ($scope.mediaUrl == undefined) {
+            return;
+        }
+        
+        castApi.loadMedia($scope.mediaUrl);
     }
-    
+
     castApi.initializeApi(onInitSuccess, onInitError);
     $scope.cast = cast;
 }]);
