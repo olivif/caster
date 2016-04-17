@@ -12,6 +12,10 @@ app.controller('HomeController', ['$scope', 'castApi', function($scope, castApi)
         $scope.$apply();
     }
 
+    function cast() {
+        castApi.launchApp();
+    }
+    
     castApi.initializeApi(onInitSuccess, onInitError);
-
+    $scope.cast = cast;
 }]);

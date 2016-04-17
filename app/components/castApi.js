@@ -1,4 +1,4 @@
-app.service('castApi', ['$rootScope', function($rootScope) {
+app.service('castApi', ['$rootScope', function ($rootScope) {
 
     //messages
     this.CASTAPI_CONNECTION_SUCCESS = "ChromeCast API is available.";
@@ -10,9 +10,9 @@ app.service('castApi', ['$rootScope', function($rootScope) {
 
     // State
     var session = null;
-     
+
     // Initializes the chromecast api and connects using the appId
-    this.initializeApi = function(onSuccess, onError) {
+    this.initializeApi = function (onSuccess, onError) {
 
         if (!chrome.cast || !chrome.cast.isAvailable) {
             console.log("No ChromeCast yet, scheduling initialize.");
@@ -55,4 +55,19 @@ app.service('castApi', ['$rootScope', function($rootScope) {
             }
         }
     };
+
+    this.launchApp = function () {
+        console.log("Launching app");
+        chrome.cast.requestSession(onSuccess, onError);
+
+        function onSuccess(e) {
+            console.log("Received sesssion with id " + e.sessionId);
+            session = e;
+        }
+        
+        function onError(e) {
+            console.log("No session");
+        } 
+    };
+
 }]);
