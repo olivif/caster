@@ -10,6 +10,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
 
     // State
     var session = null;
+    var currentMediaSession = null;
 
     // Initializes the chromecast api and connects using the appId
     this.initializeApi = function (onSuccess, onError) {
@@ -59,7 +60,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
     this.loadMedia = function (mediaUrl) {
 
         launchApp(loadMediaObject);
-        
+
         function loadMediaObject() {
             // Prepare mediaInfo object
             var mediaInfo = new chrome.cast.media.MediaInfo(mediaUrl);
@@ -74,11 +75,28 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
             request.autoplay = true;
             request.currentTime = 0;
 
-            session.loadMedia(request, onSuccess, onError);
+            session.loadMedia(request, mediaListener, onError);
         }
 
-        function onSuccess(e) {
-            console.log("Media request succeeded");
+        function mediaListener(mediaSession) {
+            currentMediaSession = mediaSession;
+            currentMediaSession.addUpdateListener(mediaUpdate);
+        }
+
+        function updateProgress() {
+            if (currentMediaSession.playerState == 'PLAYING') {
+                var progress = currentMediaSession.currentTime / currentMediaSession.media.duration;
+                console.log("Progress = " + progress);
+            }
+        }
+
+        function mediaUpdate(isAlive) {
+            if (!isAlive) {
+                console.log("Media session is not alive.");
+                return;
+            }
+
+            updateProgress();
         }
 
         function onError(e) {
@@ -92,12 +110,22 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
             function onSuccess(e) {
                 console.log("Received sesssion with id " + e.sessionId);
                 session = e;
+                session.addUpdateListener(sessionUpdate);
                 onAppLaunched();
             }
 
             function onError(e) {
                 console.log("No session");
             }
+        }
+
+        function sessionUpdate(isAlive) {
+            if (!isAlive) {
+                console.log("Media session is not alive.");
+                return;
+            }
+
+            timer = setInterval(updateProgress, 1000);
         }
     };
 
