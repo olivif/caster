@@ -10,13 +10,6 @@ angular.module('myApp.castApi', ['ngRoute'])
         this.initializeApi = function() {
 
             /**
-     * Cast initialization timer delay
-     **/
-            var CAST_API_INITIALIZATION_DELAY = 1000;
-
-            var APP_ID = "7475FD27";
-
-            /**
              * Call initialization
              */
             if (!chrome.cast || !chrome.cast.isAvailable) {
