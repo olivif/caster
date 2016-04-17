@@ -8,10 +8,14 @@ app.service('castApi', ['$rootScope', function($rootScope) {
 
     var APP_ID = "7475FD27";
 
+    // State
+    var session = null;
+     
     // Initializes the chromecast api and connects using the appId
     this.initializeApi = function(onSuccess, onError) {
 
         if (!chrome.cast || !chrome.cast.isAvailable) {
+            console.log("No ChromeCast yet, scheduling initialize.");
             setTimeout(initializeCastApi, CAST_API_INITIALIZATION_DELAY);
         }
 
@@ -33,15 +37,22 @@ app.service('castApi', ['$rootScope', function($rootScope) {
                 receiverListener,
                 autoJoinPolicyArray[1]);
 
+            console.log("Initializing ..")
             chrome.cast.initialize(apiConfig, onSuccess, onError);
         }
 
-        function sessionListener() {
-
+        function sessionListener(e) {
+            console.log("Received sesssion with id " + e.sessionId);
+            session = e;
         }
 
-        function receiverListener() {
-
+        function receiverListener(e) {
+            if (e === 'available') {
+                console.log('Receiver available');
+            }
+            else {
+                console.log('No receivers available');
+            }
         }
     };
 }]);
