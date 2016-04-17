@@ -1,10 +1,11 @@
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.home',
-  'myApp.castApi'
-]).
+var app = angular.module('myApp', ['ngRoute'])
 
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/home'});
-}]);
+    .config(['$routeProvider', function($routeProvider) {
+
+        $routeProvider.when('/home', {
+            templateUrl: 'home/home.html',
+            controller: 'HomeController'
+        })
+            .otherwise({ redirectTo: '/home' });
+    }]);

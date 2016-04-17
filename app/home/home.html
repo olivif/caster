@@ -1,4 +1,12 @@
-<div ng-app="myApp.home">
+<div ng-controller="HomeController">
+
+    <!--alerts-->
+    <div>
+        <div class="alert alert-success" role="alert" ng-show="alerts.success != null">{{alerts.success}}</div>
+        <div class="alert alert-info" role="alert" ng-show="alerts.info != null">{{alerts.info}}</div>
+        <div class="alert alert-warning" role="alert" ng-show="alerts.warn != null">{{alerts.warn}}</div>
+        <div class="alert alert-danger" role="alert" ng-show="alerts.error != null">{{alerts.error}}</div>
+    </div>
 
     <div class="media-controls">
 
@@ -31,9 +39,11 @@
     <br />
 
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="URL">
+        <input type="text" class="form-control"
+        ng-model="mediaUrl" 
+        ng-init="mediaUrl='http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4'"> 
         <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Cast</button>
+        <button class="btn btn-default" type="button" ng-click="cast()">Cast</button>
       </span>
     </div>
 </div>

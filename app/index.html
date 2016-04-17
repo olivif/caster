@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en" class="no-js">
 <!--<![endif]-->
 
 <head>
@@ -26,16 +26,18 @@
 
 </head>
 
-<body class="container">
+<body class="container" ng-app="myApp">
 
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
+    <!--header-->
     <div class="page-header">
         <h1>Caster <small>your simple URL caster</small></h1>
     </div>
-
+    
+    <!--view-->
     <div ng-view></div>
 
     <!--components-->
@@ -48,8 +50,8 @@
     <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
 
     <!--app-->
-    <script src="components/castApi.js"></script>
     <script src="app.js"></script>
+    <script src="components/castApi.js"></script>
     <script src="home/home.js"></script>
 
 </body>

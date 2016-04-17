@@ -1,14 +1,26 @@
-angular.module('myApp.home', ['ngRoute', 'myApp.castApi'])
+app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi) {
 
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/home', {
-            templateUrl: 'home/home.html',
-            controller: 'HomeController'
-        });
-    }])
+    $scope.alerts = {};
 
-    .controller('HomeController', ['castApi', function(castApi) {
+    function onInitSuccess() {
+        $scope.alerts.success = castApi.CASTAPI_CONNECTION_SUCCESS;
+        $scope.$apply();
+    }
+
+    function onInitError(e) {
+        $scope.alerts.error = castApi.CASTAPI_CONNECTION_ERROR;
+        $scope.$apply();
+    }
+
+    function cast() {
+
+        if ($scope.mediaUrl == undefined) {
+            return;
+        }
         
-        castApi.initializeApi();
-        
-    }]);
+        castApi.loadMedia($scope.mediaUrl);
+    }
+
+    castApi.initializeApi(onInitSuccess, onInitError);
+    $scope.cast = cast;
+}]);
