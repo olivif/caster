@@ -1,0 +1,22 @@
+<!doctype html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script type="text/javascript" src="../js/ext/angular.min.js"></script>
+    <script type="text/javascript" src="../js/popup.js"></script>
+    <script type="text/javascript" src="../js/chromecast.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"></link>
+</head>
+<body ng-app="app">
+    <table class="table" ng-controller='PopupCtrl'>
+        <caption>Captured Videos</caption>
+        <tbody id="videos">
+            <tr ng-repeat="video in videos track by $index | orderBy: video.date">
+                <td><a ng-href="{{video.url}}"><i class="fa fa-film"></i></a></td>
+                <td>{{video.type}}</td>
+                <td>{{video.size | videoSize}}</td>
+                <td>{{video.date | videoDate}}</td>
+                <td class="hand" ng-click='play(video)'><i class="fa fa-play"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</body>

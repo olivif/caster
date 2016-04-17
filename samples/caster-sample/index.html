@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<!--head-->
+
+<head>
+    <title>Caster</title>
+
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+
+    <!--mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<!--body-->
+
+<body class="container">
+
+    <div class="page-header">
+        <h1>Caster</h1>
+        <h4>Your quick way to casting any video link.<h4>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Video</span>
+        <input type="text" class="form-control" aria-describedby="basic-addon1" name="customMediaURL" id="customMediaURL">
+    </div>
+
+    <div>
+        <div>
+            <div style="float:left; width:100%; margin:10px;">
+                <h3 style="display: inline-block">Choose a media below or enter your own media URL to cast</h3>
+                <br>
+                <span style="font-weight:bold; color:#0000cc;">Enter custom media URL</span>:
+                <br>
+                <input type="submit" name="loadCustomMeida" value="Load Custom Media" onclick="loadCustomMedia();">
+            </div>
+            <br>
+
+            <div style=" margin:0px; float:left; display:block; width:90%;">
+                <div style=" margin:10px; float:left; display:block; width:40%;">
+                    <button onclick="launchApp()">Launch app</button>
+                    <button onclick="stopApp()">Stop app</button>
+                    <button id="joinsessionbyid" style="float:right; display:none;" onclick="joinSessionBySessionId()">Join by session ID</button>
+                    <br>
+                    <button onclick="loadMedia()">Load media</button>
+                    <button id="playpauseresume" onclick="playMedia()">Play</button>
+                    <button onclick="stopMedia()">Stop media</button>
+                    <button id="muteunmute" onclick="muteMedia();">Mute media</button>
+                    <button id="getstatus" onclick="getMediaStatus();">Get media status</button>
+                </div>
+
+                <div style="margin-top:60px; float:left; width:15%;">
+                    <input class="vertical" type="range" min="0" max="100" step="1" onmouseup="setReceiverVolume(1-this.value/100,false);">
+                    <div class="vertical">Volume control</div>
+                </div>
+            </div>
+        </div>
+        <div style=" margin:10px; float:left; display:block; width:100%;">
+            <div style="margin:10px;">
+                Progress :
+                <input id="progress" type="range" min="1" max="100" value="1" step="1" onmouseup="seekMedia(this.value);">
+                <span id="duration"></span>
+                <div id="progress_tick"></div>
+            </div>
+            <div style="margin:10px;">
+                State : <span id="playerstate">IDLE</span>
+            </div>
+
+            <div style="margin:10px;">
+                <textarea rows="20" cols="70" id="debugmessage">
+                </textarea>
+            </div>
+
+        </div>
+    </div>
+
+    <!--javascript-->
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script type="text/javascript" src="helloVideos.js"></script>
+
+</body>
+
+</html>

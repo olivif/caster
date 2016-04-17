@@ -1,1 +1,6 @@
-samples
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.DS_Store
+.idea
