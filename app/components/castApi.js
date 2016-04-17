@@ -1,61 +1,47 @@
-angular.module('myApp.castApi', ['ngRoute'])
+app.service('castApi', ['$rootScope', function($rootScope) {
 
-    .service('castApi', function() {
+    //messages
+    this.CASTAPI_CONNECTION_SUCCESS = "ChromeCast API is available.";
+    this.CASTAPI_CONNECTION_ERROR = "ChromeCast API is not available. Make sure you are using Chrome.";
 
-        var CAST_API_INITIALIZATION_DELAY = 1000;
+    var CAST_API_INITIALIZATION_DELAY = 1000;
 
-        var APP_ID = "7475FD27";
+    var APP_ID = "7475FD27";
 
-        // Initializes the chromecast api and connects using the appId
-        this.initializeApi = function() {
+    // Initializes the chromecast api and connects using the appId
+    this.initializeApi = function(onSuccess, onError) {
 
-            /**
-             * Call initialization
-             */
-            if (!chrome.cast || !chrome.cast.isAvailable) {
-                setTimeout(initializeCastApi, CAST_API_INITIALIZATION_DELAY);
-            }
+        if (!chrome.cast || !chrome.cast.isAvailable) {
+            setTimeout(initializeCastApi, CAST_API_INITIALIZATION_DELAY);
+        }
 
-            /**
-             * initialization
-             */
-            function initializeCastApi() {
+        function initializeCastApi() {
 
-                var applicationIDs = [APP_ID];
+            var applicationIDs = [APP_ID];
 
-                var autoJoinPolicyArray = [
-                    chrome.cast.AutoJoinPolicy.PAGE_SCOPED,
-                    chrome.cast.AutoJoinPolicy.TAB_AND_ORIGIN_SCOPED,
-                    chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-                ];
+            var autoJoinPolicyArray = [
+                chrome.cast.AutoJoinPolicy.PAGE_SCOPED,
+                chrome.cast.AutoJoinPolicy.TAB_AND_ORIGIN_SCOPED,
+                chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+            ];
 
-                // request session
-                var sessionRequest = new chrome.cast.SessionRequest(applicationIDs[0]);
-                console.log("sessionRequest null = " + sessionRequest === null);
-                var apiConfig = new chrome.cast.ApiConfig(
-                    sessionRequest,
-                    sessionListener,
-                    receiverListener,
-                    autoJoinPolicyArray[1]);
+            // request session
+            var sessionRequest = new chrome.cast.SessionRequest(applicationIDs[0]);
+            var apiConfig = new chrome.cast.ApiConfig(
+                sessionRequest,
+                sessionListener,
+                receiverListener,
+                autoJoinPolicyArray[1]);
 
-                chrome.cast.initialize(apiConfig, onInitSuccess, onInitError);
-            }
-            
-            function onInitError(e) {
-                console.log("on init error ");
-                console.log(e);
-            }
-            
-            function onInitSuccess() {
-                console.log("on init success ");
-            }
-            
-            function sessionListener() {
-                
-            }
-            
-            function receiverListener() {
-                
-            }
-        };
-    });
+            chrome.cast.initialize(apiConfig, onSuccess, onError);
+        }
+
+        function sessionListener() {
+
+        }
+
+        function receiverListener() {
+
+        }
+    };
+}]);
