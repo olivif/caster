@@ -84,6 +84,12 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
         }
 
         function updateProgress() {
+
+            if (currentMediaSession === null) {
+                console.log("No media session yet ...");
+                return;
+            }
+
             if (currentMediaSession.playerState == 'PLAYING') {
                 var progress = currentMediaSession.currentTime / currentMediaSession.media.duration;
                 console.log("Progress = " + progress);
@@ -125,7 +131,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
                 return;
             }
 
-            timer = setInterval(updateProgress, 1000);
+            timer = setInterval(updateProgress, 2000);
         }
     };
 
