@@ -8,6 +8,7 @@
         <div class="alert alert-danger" role="alert" ng-show="alerts.error != null">{{alerts.error}}</div>
     </div>
 
+    <!--media controls-->
     <div class="media-controls">
 
         <button type="button" class="btn btn-default btn-xs" ng-click="play()">
@@ -38,12 +39,23 @@
 
     <br />
 
+    <!--input-->
     <div class="input-group">
-        <input type="text" class="form-control"
-        ng-model="mediaUrl" 
-        ng-init="mediaUrl='http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4'"> 
+        <input type="text" class="form-control" ng-model="mediaUrl" ng-init="mediaUrl='http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4'">
+
         <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="cast()">Cast</button>
-      </span>
+            <button class="btn btn-default" type="button" ng-click="cast()">Cast</button>
+        </span>
+    </div>
+
+    <br />
+
+    <!--slider-->
+    <div>
+        <div class="slider-left" ng-style="{width: {{getProgress()}} + '%'}">
+        </div>
+
+        <div class="slider-right" ng-style="{width: {{100 - getProgress()}} + '%'}">
+        </div>
     </div>
 </div>

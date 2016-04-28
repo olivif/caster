@@ -28,3 +28,18 @@
   content: "";
   padding: 0;
 }
+
+/*slider*/
+.slider-left {
+  display: block;
+	height: 15px;
+  float: left;
+	background: #FFBCA3;
+}
+
+.slider-right {
+  display: block;
+	height: 15px;
+  float: left;
+	background: coral;
+}

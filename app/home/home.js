@@ -17,7 +17,7 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
         if ($scope.mediaUrl == undefined) {
             return;
         }
-        
+
         castApi.loadMedia($scope.mediaUrl);
     }
 
@@ -26,4 +26,5 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
     $scope.pause = castApi.pauseMedia;
     $scope.play = castApi.playMedia;
     $scope.stop = castApi.stopMedia;
+    $scope.getProgress = castApi.getProgress;
 }]);

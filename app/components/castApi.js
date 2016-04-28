@@ -11,6 +11,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
     // State
     var session = null;
     var currentMediaSession = null;
+    var progress = null;
 
     // Initializes the chromecast api and connects using the appId
     this.initializeApi = function (onSuccess, onError) {
@@ -91,7 +92,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
             }
 
             if (currentMediaSession.playerState == 'PLAYING') {
-                var progress = currentMediaSession.currentTime / currentMediaSession.media.duration;
+                progress = currentMediaSession.currentTime / currentMediaSession.media.duration;
                 console.log("Progress = " + progress);
             }
         }
@@ -164,4 +165,9 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
             console.log(operationName + " failed")
         }
     }
+
+    this.getProgress = function () {
+        return progress;
+    }
+
 }]);
