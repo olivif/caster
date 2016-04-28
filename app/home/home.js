@@ -23,4 +23,6 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
 
     castApi.initializeApi(onInitSuccess, onInitError);
     $scope.cast = cast;
+    $scope.pause = castApi.pauseMedia;
+    $scope.play = castApi.playMedia;
 }]);

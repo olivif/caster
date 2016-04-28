@@ -135,4 +135,27 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
         }
     };
 
+    this.pauseMedia = function () {
+        currentMediaSession.pause(null, onPauseSuccess, onPauseError);
+
+        function onPauseSuccess() {
+            console.log("Pausing succeded")
+        }
+
+        function onPauseError() {
+            console.log("Pausing failed");
+        }
+    }
+
+    this.playMedia = function () {
+        currentMediaSession.play(null, onPlaySuccess, onPlayError);
+
+        function onPlaySuccess() {
+            console.log("Playing succeded")
+        }
+
+        function onPlayError() {
+            console.log("Playing failed");
+        }
+    }
 }]);
