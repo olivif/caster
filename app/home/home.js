@@ -25,4 +25,5 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
     $scope.cast = cast;
     $scope.pause = castApi.pauseMedia;
     $scope.play = castApi.playMedia;
+    $scope.stop = castApi.stopMedia;
 }]);
