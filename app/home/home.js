@@ -26,5 +26,15 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
     $scope.pause = castApi.pauseMedia;
     $scope.play = castApi.playMedia;
     $scope.stop = castApi.stopMedia;
-    $scope.getProgress = castApi.getProgress;
+
+    setInterval(function () {
+        $scope.$apply(function () {
+
+            var progress = castApi.getProgress();
+
+            angular.element(document.getElementsByClassName("slider-left")).css('width', progress + '%');
+            angular.element(document.getElementsByClassName("slider-right")).css('width', (100 - progress) + '%');
+        });
+    }, 500);
+
 }]);

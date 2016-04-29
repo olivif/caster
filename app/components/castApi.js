@@ -92,7 +92,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
             }
 
             if (currentMediaSession.playerState == 'PLAYING') {
-                progress = currentMediaSession.currentTime / currentMediaSession.media.duration;
+                progress = currentMediaSession.currentTime / currentMediaSession.media.duration * 100;
                 console.log("Progress = " + progress);
             }
         }
