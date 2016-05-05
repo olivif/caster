@@ -183,4 +183,8 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
         return progress;
     }
 
+    this.hasMediaSession = function () {
+        return currentMediaSession != null;
+    }
+
 }]);
