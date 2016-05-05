@@ -112,7 +112,19 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
 
         function launchApp(onAppLaunched) {
             console.log("Launching app");
-            chrome.cast.requestSession(onSuccess, onError);
+            console.log(session);
+
+            if (session != null && session.sessionId != null) {
+                // Join by session id
+                console.log("Joining by session with id " + session.sessionId);
+                chrome.cast.requestSessionById(session.sessionId);
+                session.addUpdateListener(sessionUpdate);
+                onAppLaunched();
+            } else {
+                // Request a new session
+                chrome.cast.requestSession(onSuccess, onError);
+                console.log("Joining by requesting new session");
+            }
 
             function onSuccess(e) {
                 console.log("Received sesssion with id " + e.sessionId);
@@ -123,6 +135,7 @@ app.service('castApi', ['$rootScope', function ($rootScope) {
 
             function onError(e) {
                 console.log("No session");
+                console.log(e);
             }
         }
 
