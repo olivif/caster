@@ -9,31 +9,45 @@
     </div>
 
     <!--media controls-->
-    <div class="media-controls">
+    <div class="media-controls" ng-show="hasMediaSession">
 
-        <button type="button" class="btn btn-default btn-xs" ng-click="play()">
-            <span class="btn-lg glyphicon glyphicon-play"></span>&nbsp;
-        </button>
+        <!--buttons-->
+        <div>
+            <button type="button" class="btn btn-default btn-xs" ng-click="play()">
+                <span class="btn-lg glyphicon glyphicon-play"></span>&nbsp;
+            </button>
 
-        <button type="button" class="btn btn-default btn-xs" ng-click="pause()">
-            <span class="btn-lg glyphicon glyphicon-pause"></span>&nbsp;
-        </button>
+            <button type="button" class="btn btn-default btn-xs" ng-click="pause()">
+                <span class="btn-lg glyphicon glyphicon-pause"></span>&nbsp;
+            </button>
 
-        <button type="button" class="btn btn-default btn-xs" ng-click="stop()">
-            <span class="btn-lg glyphicon glyphicon-stop"></span>&nbsp;
-        </button>
+            <button type="button" class="btn btn-default btn-xs" ng-click="stop()">
+                <span class="btn-lg glyphicon glyphicon-stop"></span>&nbsp;
+            </button>
 
-        <button type="button" class="btn btn-default btn-xs" ng-show="false">
-            <span class="btn-lg glyphicon glyphicon-volume-off"></span>&nbsp;
-        </button>
+            <button type="button" class="btn btn-default btn-xs" ng-show="false">
+                <span class="btn-lg glyphicon glyphicon-volume-off"></span>&nbsp;
+            </button>
 
-        <button type="button" class="btn btn-default btn-xs" ng-show="false">
-            <span class="btn-lg glyphicon glyphicon-volume-down"></span>&nbsp;
-        </button>
+            <button type="button" class="btn btn-default btn-xs" ng-show="false">
+                <span class="btn-lg glyphicon glyphicon-volume-down"></span>&nbsp;
+            </button>
 
-        <button type="button" class="btn btn-default btn-xs" ng-show="false">
-            <span class="btn-lg glyphicon glyphicon-volume-up"></span>&nbsp;
-        </button>
+            <button type="button" class="btn btn-default btn-xs" ng-show="false">
+                <span class="btn-lg glyphicon glyphicon-volume-up"></span>&nbsp;
+            </button>
+
+        </div>
+
+        <br />
+
+        <!--slider-->
+        <div>
+            <div class="slider-left"></div>
+            <div class="slider-right"></div>
+        </div>
+
+        <br />
 
     </div>
 
@@ -50,9 +64,5 @@
 
     <br />
 
-    <!--slider-->
-    <div>
-        <div class="slider-left"></div>
-        <div class="slider-right"></div>
-    </div>
+
 </div>

@@ -34,6 +34,8 @@ app.controller('HomeController', ['$scope', 'castApi', function ($scope, castApi
 
             angular.element(document.getElementsByClassName("slider-left")).css('width', progress + '%');
             angular.element(document.getElementsByClassName("slider-right")).css('width', (100 - progress) + '%');
+
+            $scope.hasMediaSession = castApi.hasMediaSession();
         });
     }, 500);
 
